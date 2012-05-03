@@ -8,7 +8,6 @@ This is cookie opt in-out library as per  the new EU law released on the 26th Ma
 Simple include the cookie javascript file on your page and initilize cookie manage on page load.
 
 ```html
-  <!html>
   <html>
     <head>
     </head>
@@ -40,8 +39,6 @@ Simple include the cookie javascript file on your page and initilize cookie mana
 You can use Gauravity.Cookie.hasSubscribed(); method to check if the user has enabled cookies.
 
 ```html
-  <!html>
-
     <script type="text/javascript">
         if (Gauravity.Cookie.hasSubscribed()) {
             /**
