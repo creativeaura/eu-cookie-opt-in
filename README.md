@@ -1,9 +1,11 @@
 EU - Cookie Opt in-out
 ================
 
-This Cookie scripts will give you a user interface where visitors can optin or out to allow your website to user cookies. (An inspiration from BT.com)
+This Cookie scripts will give you an user interface where visitors can optin or out to allow your website to user cookies. (An inspiration from BT.com). Once user opts for a level privacy you can load various async scripts. 
 
-An optimized mobile version is also coming soon. 
+For example if user don't opt for targeting level you will not load or include your google analytics code. You can define a strict level of cookies required for your website to work and mention it on the functionalList option while initializing the cookie manager code. 
+
+An optimized mobile version is also coming soon. If you have any better idea please drop me an email at gaurav@jassal.me
 
 Demo URL 
 
@@ -37,13 +39,13 @@ Simple include the cookie javascript file on your page and initilize cookie mana
     
         		function init() {
               EU.CookieManager.init({
-              expires: 20,
-              cookie_prefix: 'EU_',
-              optin_cookie_name: 'OPTIN',
-              test:false,
-              idle:0,
-              link: 'cookie.html',
-              functionalList: {
+              expires: 20, // Define the expiry time for the cookie
+              cookie_prefix: 'EU_', // prefix for the cookie
+              optin_cookie_name: 'OPTIN', // cookie name
+              test:false, 
+              idle:0, // Time in seconds of you want the initial popup to close automatically if user dont intract with it. 
+              link: 'cookie.html', // Linkf or the page if you want to include a page for cookie information for user. 
+              functionalList: { // Functionality list for all three levels. 
                 'strict': {
                   'will' : ['Remember what is in your shopping basket', 'Remember cookie access level.'],
                   'willnot': ['Send information to other websites so that advertising is more relevant to you', 'Remember your log-in details', 'Improve overall performance of the website', 'Provide you with live, online chat support']
@@ -85,6 +87,9 @@ You can use getLevel method to retrieve the selected level
 ```html
     <script type="text/javascript">
         var selectedLevel = EU.Cookie.getLevel();
+        if ( selectedLevel === '2') {
+          // eg. Include your Chat scripts 
+        }
     </script>
 ```
 
