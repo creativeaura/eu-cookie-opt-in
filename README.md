@@ -27,7 +27,7 @@ Simple include the cookie javascript file on your page and initilize cookie mana
         	<ul>
           <li><a href='javascript:EU.CookiePreferenceUI.toggleOptions();void(0);'>Change Settings</a></li>
         </ul>
-          <script type="text/javascript" src='eu-cookie.debug.min.js'></script>
+          <script type="text/javascript" src='cookie.debug.min.js'></script>
           <script type="text/javascript">
             window.onload = init;
     
