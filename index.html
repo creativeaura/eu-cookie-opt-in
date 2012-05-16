@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <meta charset="utf-8">
+	<meta charset="utf-8">
 	<title>HUK Cookie JS</title>
 	<meta name="description" content="">
   <meta name="author" content="">
@@ -11,24 +11,42 @@
 <body>
 	
 	<div id='container'>
-		<h1>Cookie Manager</h1>
+		<h1>EU - Cookie Opt in-out</h1>
+            <p>This is cookie opt in-out library as per the new EU law released on the 26th May.</p>
 		<ul>
-      <li><a href='javascript:HUK.CookiePreferenceUI.show();void(0);'>Show panel</a></li>
-      <li><a href='javascript:HUK.CookiePreferenceUI.hide();void(0);'>Hide panel</a></li>
+      <li><a href='javascript:EU.CookiePreferenceUI.toggleOptions();void(0);'>Change Settings</a></li>
     </ul>
 	</div>
 
-	<script type="text/javascript" src='eu-cookie.debug.js'></script>
+	
+
+	<script type="text/javascript" src='cookie.debug.min.js'></script>
 	
 	<script type="text/javascript">
 		window.onload = init;
 
-		function init() {
-      Gauravity.CookieManager.init({
+		function init(){
+      EU.CookieManager.init({
       	expires: 20,
-      	cookie_prefix: 'Gauravity_',
+      	cookie_prefix: 'EU_',
       	optin_cookie_name: 'OPTIN',
-      	test:false
+      	test:false,
+      	idle:0,
+      	link: 'cookie.html',
+      	functionalList: {
+      		'strict': {
+      			'will' : ['Remember what is in your shopping basket', 'Remember cookie access level.'],
+      			'willnot': ['Send information to other websites so that advertising is more relevant to you', 'Remember your log-in details', 'Improve overall performance of the website', 'Provide you with live, online chat support']
+      		},
+      		'functional': {
+      			'will' : ['Remember what is in your shopping basket', 'Remember cookie access level.','Remember your log-in details','Make sure the website looks consistent','Offer live chat support'],
+      			'willnot': ['Allow you to share pages with social networks like Facebook', 'Allow you to comment on blogs', 'Send information to other websites so that advertising is more relevant to you']
+      		},
+      		'targeting': {
+      			'will' : ['Remember what is in your shopping basket', 'Remember cookie access level.','Remember your log-in details','Make sure the website looks consistent','Offer live chat support','Send information to other websites so that advertising is more relevant to you'],
+      			'willnot': []
+      		}
+      	}
       });
 		}
 	</script>
