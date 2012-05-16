@@ -2,7 +2,6 @@
   "use strict";
   /**
    * @class EU
-   * ## Honda UK 
    * @version 0.0.1v
    * 
    * JavaScript library to manage cookie optin and optout for users visiting
@@ -31,7 +30,6 @@
    * 
    *     var has_user_subscribed = EU.Cookie.hasSubscribed();
    *
-   * [1]: http://honda.co.uk
    */
   var EU = {}, AppConfig, idleTimer, hide, show, toggle, idleCallback, createOptionPanel, listFeatures, toggleOptions;
 
