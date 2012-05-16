@@ -1,7 +1,7 @@
 EU - Cookie Opt in-out
 ================
 
-This Cookie scripts will give you a user interface where visitors can optin or out to allow your website to user cookies. 
+This Cookie scripts will give you a user interface where visitors can optin or out to allow your website to user cookies. (An inspiration from BT.com)
 
 An optimized mobile version is also coming soon. 
 
