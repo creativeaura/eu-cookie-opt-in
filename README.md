@@ -5,6 +5,10 @@ This Cookie scripts will give you a user interface where visitors can optin or o
 
 An optimized mobile version is also coming soon. 
 
+Demo URL 
+
+http://jassal.me/cookie/index.html
+
 The Cookie Law is a new piece of privacy legislation that requires websites to obtain consent from visitors to store or retrieve any information on a computer or any other web connected device, like a smartphone or tablet.
 
 It has been designed to protect online privacy, by making consumers aware of how information about them is collected by websites, and enable them to choose whether or not they want to allow it to take place.
