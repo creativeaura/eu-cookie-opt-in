@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>EU Cookie Opt in/out Script by creativeaura</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>EU Cookie Opt in/out Script</h1>
+        <p>This is cookie opt in-out library as per  the new EU law released on the 26th May.</p>
+        <p class="view"><a href="https://github.com/creativeaura/eu-cookie-opt-in">View the Project on GitHub <small>creativeaura/eu-cookie-opt-in</small></a></p>
+        <ul>
+          <li><a href="https://github.com/creativeaura/eu-cookie-opt-in/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/creativeaura/eu-cookie-opt-in/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/creativeaura/eu-cookie-opt-in">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>EU - Cookie Opt in-out</h1>
+
+<p>This Cookie scripts will give you an user interface where visitors can optin or out to allow your website to user cookies. (An inspiration from BT.com). Once user opts for a level privacy you can load various async scripts. </p>
+
+<p>For example if user don't opt for targeting level you will not load or include your google analytics code. You can define a strict level of cookies required for your website to work and mention it on the functionalList option while initializing the cookie manager code. </p>
+
+<p>An optimized mobile version is also coming soon. If you have any better idea please drop me an email at <a href="mailto:gaurav@jassal.me">gaurav@jassal.me</a></p>
+
+<h3>Demo URL</h3>
+
+<p><a href="http://jassal.me/cookie/index.html">http://jassal.me/cookie/index.html</a></p>
+
+<p>The Cookie Law is a new piece of privacy legislation that requires websites to obtain consent from visitors to store or retrieve any information on a computer or any other web connected device, like a smartphone or tablet.</p>
+
+<p>It has been designed to protect online privacy, by making consumers aware of how information about them is collected by websites, and enable them to choose whether or not they want to allow it to take place.</p>
+
+<p>It started as an EU Directive that was adopted by all EU countries on May 26th 2011.  At the same time the UK updated its Privacy and Electronic Communications Regulations, which brought the EU Directive it into UK law. </p>
+
+<p>Each EU member state has done or is doing the same thing. Although they all have their own approach and interpretation, the basic requirements of the directive remain the same.</p>
+
+<h3>Usage</h3>
+
+<p>Simple include the cookie javascript file on your page and initilize cookie manage on page load.</p>
+
+<div class="highlight">
+<pre>  <span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;h1&gt;</span>Cookie Manager<span class="nt">&lt;/h1&gt;</span>
+            <span class="nt">&lt;ul&gt;</span>
+          <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">'javascript:EU.CookiePreferenceUI.toggleOptions();void(0);'</span><span class="nt">&gt;</span>Change Settings<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+        <span class="nt">&lt;/ul&gt;</span>
+          <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">'cookie.debug.min.js'</span><span class="nt">&gt;&lt;/script&gt;</span>
+          <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+            <span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="nx">init</span><span class="p">;</span>
+
+                <span class="kd">function</span> <span class="nx">init</span><span class="p">()</span> <span class="p">{</span>
+              <span class="nx">EU</span><span class="p">.</span><span class="nx">CookieManager</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>
+              <span class="nx">expires</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span> <span class="c1">// Define the expiry time for the cookie</span>
+              <span class="nx">cookie_prefix</span><span class="o">:</span> <span class="s1">'EU_'</span><span class="p">,</span> <span class="c1">// prefix for the cookie</span>
+              <span class="nx">optin_cookie_name</span><span class="o">:</span> <span class="s1">'OPTIN'</span><span class="p">,</span> <span class="c1">// cookie name</span>
+              <span class="nx">test</span><span class="o">:</span><span class="kc">false</span><span class="p">,</span> 
+              <span class="nx">idle</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span> <span class="c1">// Time in seconds of you want the initial popup to close automatically if user dont intract with it. </span>
+              <span class="nx">link</span><span class="o">:</span> <span class="s1">'cookie.html'</span><span class="p">,</span> <span class="c1">// Linkf or the page if you want to include a page for cookie information for user. </span>
+              <span class="nx">functionalList</span><span class="o">:</span> <span class="p">{</span> <span class="c1">// Functionality list for all three levels. </span>
+                <span class="s1">'strict'</span><span class="o">:</span> <span class="p">{</span>
+                  <span class="s1">'will'</span> <span class="o">:</span> <span class="p">[</span><span class="s1">'Remember what is in your shopping basket'</span><span class="p">,</span> <span class="s1">'Remember cookie access level.'</span><span class="p">],</span>
+                  <span class="s1">'willnot'</span><span class="o">:</span> <span class="p">[</span><span class="s1">'Send information to other websites so that advertising is more relevant to you'</span><span class="p">,</span> <span class="s1">'Remember your log-in details'</span><span class="p">,</span> <span class="s1">'Improve overall performance of the website'</span><span class="p">,</span> <span class="s1">'Provide you with live, online chat support'</span><span class="p">]</span>
+                <span class="p">},</span>
+                <span class="s1">'functional'</span><span class="o">:</span> <span class="p">{</span>
+                  <span class="s1">'will'</span> <span class="o">:</span> <span class="p">[</span><span class="s1">'Remember what is in your shopping basket'</span><span class="p">,</span> <span class="s1">'Remember cookie access level.'</span><span class="p">,</span><span class="s1">'Remember your log-in details'</span><span class="p">,</span><span class="s1">'Make sure the website looks consistent'</span><span class="p">,</span><span class="s1">'Offer live chat support'</span><span class="p">],</span>
+                  <span class="s1">'willnot'</span><span class="o">:</span> <span class="p">[</span><span class="s1">'Allow you to share pages with social networks like Facebook'</span><span class="p">,</span> <span class="s1">'Allow you to comment on blogs'</span><span class="p">,</span> <span class="s1">'Send information to other websites so that advertising is more relevant to you'</span><span class="p">]</span>
+                <span class="p">},</span>
+                <span class="s1">'targeting'</span><span class="o">:</span> <span class="p">{</span>
+                  <span class="s1">'will'</span> <span class="o">:</span> <span class="p">[</span><span class="s1">'Remember what is in your shopping basket'</span><span class="p">,</span> <span class="s1">'Remember cookie access level.'</span><span class="p">,</span><span class="s1">'Remember your log-in details'</span><span class="p">,</span><span class="s1">'Make sure the website looks consistent'</span><span class="p">,</span><span class="s1">'Offer live chat support'</span><span class="p">,</span><span class="s1">'Send information to other websites so that advertising is more relevant to you'</span><span class="p">],</span>
+                  <span class="s1">'willnot'</span><span class="o">:</span> <span class="p">[]</span>
+                <span class="p">}</span>
+              <span class="p">}</span>
+            <span class="p">});</span>
+                <span class="p">}</span>
+        <span class="nt">&lt;/script&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+  <span class="nt">&lt;/html&gt;</span>
+</pre>
+</div>
+
+
+<h3>Check subscription</h3>
+
+<p>You can use EU.Cookie.hasSubscribed(); method to check if the user has enabled cookies.</p>
+
+<div class="highlight">
+<pre>    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">EU</span><span class="p">.</span><span class="nx">Cookie</span><span class="p">.</span><span class="nx">hasSubscribed</span><span class="p">())</span> <span class="p">{</span>
+            <span class="cm">/**</span>
+<span class="cm">                Google Analytics Code Here or any other tracking code.</span>
+<span class="cm">            **/</span>    
+        <span class="p">}</span>
+    <span class="nt">&lt;/script&gt;</span>
+</pre>
+</div>
+
+
+<h3>Get selected level</h3>
+
+<p>You can use getLevel method to retrieve the selected level</p>
+
+<div class="highlight">
+<pre>    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+        <span class="kd">var</span> <span class="nx">selectedLevel</span> <span class="o">=</span> <span class="nx">EU</span><span class="p">.</span><span class="nx">Cookie</span><span class="p">.</span><span class="nx">getLevel</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="nx">selectedLevel</span> <span class="o">===</span> <span class="s1">'2'</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">// eg. Include your Chat scripts </span>
+        <span class="p">}</span>
+    <span class="nt">&lt;/script&gt;</span>
+</pre>
+</div>
+
+
+<h3>Set user level</h3>
+
+<p>You can use getLevel method to retrieve the selected level</p>
+
+<div class="highlight">
+<pre>    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+        <span class="nx">EU</span><span class="p">.</span><span class="nx">Cookie</span><span class="p">.</span><span class="nx">setLevel</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="nt">&lt;/script&gt;</span>
+</pre>
+</div>
+
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/creativeaura">creativeaura</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-31834541-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
