@@ -27,6 +27,7 @@ Simple include the cookie javascript file on your page and initilize cookie mana
 ```html
   <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="css/cookie_style.css">
     </head>
     <body>
         <h1>Cookie Manager</h1>
