@@ -19,6 +19,8 @@
 	</div>
 
 	
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="jquery-1.7.2.min.js"><\/script>')</script>
 
 	<script type="text/javascript" src='cookie.debug.min.js'></script>
 	
@@ -33,20 +35,12 @@
       	test:false,
       	idle:0,
       	link: 'cookie.html',
-      	functionalList: {
-      		'strict': {
-      			'will' : ['Remember what is in your shopping basket', 'Remember cookie access level.'],
-      			'willnot': ['Send information to other websites so that advertising is more relevant to you', 'Remember your log-in details', 'Improve overall performance of the website', 'Provide you with live, online chat support']
-      		},
-      		'functional': {
-      			'will' : ['Remember what is in your shopping basket', 'Remember cookie access level.','Remember your log-in details','Make sure the website looks consistent','Offer live chat support'],
-      			'willnot': ['Allow you to share pages with social networks like Facebook', 'Allow you to comment on blogs', 'Send information to other websites so that advertising is more relevant to you']
-      		},
-      		'targeting': {
-      			'will' : ['Remember what is in your shopping basket', 'Remember cookie access level.','Remember your log-in details','Make sure the website looks consistent','Offer live chat support','Send information to other websites so that advertising is more relevant to you'],
-      			'willnot': []
-      		}
-      	}
+        defaultValue:4,
+        assosiatedCookies: {
+          'strict' : ['a'],
+          'functional': ['b', 'c'],
+          'targeting': ['d','e', 'f']
+        }
       });
 		}
 	</script>

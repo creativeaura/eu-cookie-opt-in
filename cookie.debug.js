@@ -1,17 +1,17 @@
-(function (exports) {
+(function (exports, $) {
   "use strict";
   /**
    * @class EU
    * @version 0.0.1v
-   * 
+   *
    * JavaScript library to manage cookie optin and optout for users visiting
-   * your website. Once we initilize the CookieMange Class 
+   * your website. Once we initilize the CookieMange Class
    * the mechanic will check if the user as opted in or out for saving cookies.
    *
    * If they have opted out we will block the loading of third party libraries.
    * If they have not saved any preference yet will will display a perference panel
    * to be able to optin or optout.
-   * 
+   *
    * Sub pacakges
    *
    * - {@link Cookie Cookie Class}
@@ -20,25 +20,40 @@
    *
    * An embedded live example:
    *     @example
-   * 
+   *
    *     EU.CookieManager.init({
    *      expires: 20
    *     });
    *
    * If you would like to check if user has subscribed to cookie optin or not:
    *     @example
-   * 
+   *
    *     var has_user_subscribed = EU.Cookie.hasSubscribed();
    *
    */
-  var EU = {}, AppConfig, idleTimer, hide, show, toggle, idleCallback, createOptionPanel, listFeatures, toggleOptions;
+  var EU = {}, AppConfig, idleTimer, hide, show, toggle, idleCallback,
+    createOptionPanel, listFeatures, toggleOptions, removeCookies;
 
   AppConfig = {
     idle: 0,
     level: 0,
     message: 'The cookie settings on this website are set to \'<strong>allow all cookies</strong>\' to give you the very best experience.' +
       ' If you continue without changing these settings, you consent to this - but if you want, you can change your settings' +
-      ' you can click on Change Settings link at any time.'
+      ' you can click on Change Settings link at any time.',
+    functionalList: {
+        'strict': {
+          'will' : ['Remember what is in your shopping basket', 'Remember cookie access level.'],
+          'willnot': ['Send information to other websites so that advertising is more relevant to you', 'Remember your log-in details', 'Improve overall performance of the website', 'Provide you with live, online chat support']
+        },
+        'functional': {
+          'will' : ['Remember what is in your shopping basket', 'Remember cookie access level.','Remember your log-in details','Make sure the website looks consistent','Offer live chat support'],
+          'willnot': ['Allow you to share pages with social networks like Facebook', 'Allow you to comment on blogs', 'Send information to other websites so that advertising is more relevant to you']
+        },
+        'targeting': {
+          'will' : ['Remember what is in your shopping basket', 'Remember cookie access level.','Remember your log-in details','Make sure the website looks consistent','Offer live chat support','Send information to other websites so that advertising is more relevant to you'],
+          'willnot': []
+        }
+      }
   };
   
   /**
@@ -122,7 +137,7 @@
   /**
    * @class CookiePreferenceUI
    * This class will create UI to manage cookie opt in - out.
-   * 
+   *
    * @extends EU
    * @singleton
    */
@@ -216,7 +231,7 @@
       });
     }
     /**
-     * Function to create the preference panel for optin / optout 
+     * Function to create the preference panel for optin / optout
      * @return {Boolean} panel
      * @private
      * @method
@@ -247,35 +262,17 @@
         positionPanel(panel);
         body.appendChild(panel);
 
-        /** 
-         * Add event listener to the change settings button.
-         * When this button is triggered the extended UI panel is toggled.
-         * 
-         */
-        EU.Events.addEvent(document.getElementById('EU_OPIN_SETTINGS'), 'click', function (event) {
+        $('#EU_OPIN_SETTINGS').bind('click', function(event) {
           toggleOptions();
           hide();
         });
-
-        /** 
-         * Add event listener to the ignore / No, Thanks button.
-         * When this button is triggered it close the panel 
-         * and set the cookie value to 4 = use default functionality.
-         *
-         */
-
-        EU.Events.addEvent(document.getElementById('EU_OPIN_CANCEL'), 'click', function (event) {
+        
+        $('#EU_OPIN_CANCEL').bind('click', function(event) {
           EU.Cookie.set({name: AppConfig.cookie, value: '4', expires: expires});
           hide();
         });
 
-        /** 
-         * Add Event listener to the mosemove on the panel UI.
-         * On mousemove on the panel we clear the timeout function
-         * that will hide the panel automaically. And also remove the event listener.
-         *
-         */
-        EU.Events.addEvent(document.getElementById('huk_cookie_prefernce_panel'), 'mousemove', function (event) {
+        $('#huk_cookie_prefernce_panel').bind('mouseenter', function(event) {
           clearTimeout(idleTimer);
         });
       }
@@ -313,13 +310,13 @@
               '<h2>Select the level of cookie you want to allow.</h2>' +
               '<div id="cokkie-options">' +
                   '<label for="strict"><span>Strictly necessary &amp; Performance</span>' +
-                    '<input type="radio" id="strict" name="cookie-opt" value="1"/>' +
+                    '<input type="checkbox" id="strict" name="cookie-opt" value="1"/>' +
                   '</label>' +
                   '<label for="functional"><span>Functional</span>' +
-                    '<input type="radio" id="functional" name="cookie-opt" value="2"/>' +
+                    '<input type="checkbox" id="functional" name="cookie-opt" value="2"/>' +
                   '</label>' +
                   '<label for="targeting"><span>Targeting</span>' +
-                    '<input type="radio" id="targeting" name="cookie-opt" value="3"/>' +
+                    '<input type="checkbox" id="targeting" name="cookie-opt" value="3"/>' +
                   '</label>' +
               '</div>' +
               '<div class="clearfix">&nbsp;</div>' +
@@ -346,45 +343,64 @@
         if (EU.Cookie.get(AppConfig.cookie) === null || EU.Cookie.get(AppConfig.cookie) === '1') {
           listFeatures('strict');
           document.getElementById('strict').checked = true;
+          document.getElementById('functional').checked = false;
+          document.getElementById('targeting').checked = false;
         } else if (EU.Cookie.get(AppConfig.cookie) === '2') {
           listFeatures('functional');
           document.getElementById('functional').checked = true;
+          document.getElementById('strict').checked = true;
+          document.getElementById('targeting').checked = false;
         } else if (EU.Cookie.get(AppConfig.cookie) === '3') {
           listFeatures('targeting');
           document.getElementById('targeting').checked = true;
+          document.getElementById('functional').checked = false;
+          document.getElementById('strict').checked = false;
         }
       }
-      EU.Events.addEvent(document.getElementById('strict'), 'click', function (event) {
-        listFeatures('strict');
-        hide();
-      });
-      EU.Events.addEvent(document.getElementById('functional'), 'click', function (event) {
-        listFeatures('functional');
-        hide();
-      });
-      EU.Events.addEvent(document.getElementById('targeting'), 'click', function (event) {
-        listFeatures('targeting');
-        hide();
-      });
 
-      EU.Events.addEvent(document.getElementById('COOKIE_CANCEL'), 'click', function (event) {
-        toggleOptions();
+      $('#strict, #functional, #targeting').bind('click', function(event) {
+        listFeatures(event.currentTarget.id);
+        if(event.currentTarget.id === 'strict') {
+          if ($('#strict').attr('checked')  !== 'checked') {
+            $('#strict').attr('checked', 'checked');
+          }
+        } else if(event.currentTarget.id === 'functional') {
+          if ($('#functional').attr('checked')  !== 'checked') {
+            $('#strict').attr('checked', 'checked');
+            $('#functional').attr('checked', false);
+            $('#targeting').attr('checked', false);
+          }
+        } else if(event.currentTarget.id === 'targeting') {
+          if ($('#targeting').attr('checked')  === 'checked') {
+            $('#strict').attr('checked', 'checked');
+            $('#functional').attr('checked', 'checked');
+            $('#targeting').attr('checked', 'checked');
+          }
+        }
         hide();
       });
 
       EU.Events.addEvent(document.getElementById('COOKIE_SAVE'), 'click', function (event) {
-        if (document.getElementById('strict').checked) {
-          EU.Cookie.set({name: AppConfig.cookie, value: '1', expires: expires});
+        if (document.getElementById('targeting').checked) {
+          EU.Cookie.set({name: AppConfig.cookie, value: '3', expires: expires});
         } else if(document.getElementById('functional').checked) {
           EU.Cookie.set({name: AppConfig.cookie, value: '2', expires: expires});
-        } else if(document.getElementById('targeting').checked) {
-          EU.Cookie.set({name: AppConfig.cookie, value: '3', expires: expires});
+        } else if(document.getElementById('strict').checked) {
+          EU.Cookie.set({name: AppConfig.cookie, value: '1', expires: expires});
         }
         hide();
         toggleOptions();
       });
     }
 
+    removeCookies = function(currentOption) {
+      if (currentOption === 'strict') {
+        EU.Cookie.trash(AppConfig.assosiatedCookies.functional);
+        EU.Cookie.trash(AppConfig.assosiatedCookies.targeting);
+      } else if(currentOption === 'functional') {
+        EU.Cookie.trash(AppConfig.assosiatedCookies.targeting);
+      }
+    };
     listFeatures = function(n) {
       var i, j, will, willnot, willWraper = '<h3>This website will:</h3><ul>', willNotWraper = '<h3>This website will not:</h3><ul>';
       will = AppConfig.functionalList[n].will;
@@ -543,27 +559,27 @@
     }
     /**
      * Function to delete the cookie
-     * @param {String} options.name The name of the cookie you want to retrieve.
-     * @param {String} options.path Path of the stored cookie
-     * @param {String} options.domain Domain or subdomain the cookie is stored.
+     * @param {String / Array} cookies list that need to be removed.
      * @method
      */
-    function trash(options) {
-      var o = {};
-      if ((typeof (options) === 'string')) {
-        o.name = options;
-      } else {
-        o = options;
-      }
-      if (get(o.name)) {
-        document.cookie = o.name + '=' +
-          ((o.path) ? ';path=' + o.path : '') +
-          ((o.domain) ? ';domain=' + o.domain : '') +
+    function trash(cookies) {
+      if (typeof(cookies) === 'string') {
+        document.cookie = cookies + '=' +
+          ((AppConfig.path) ? ';path=' + AppConfig.path : '') +
+          ((AppConfig.domain) ? ';domain=' + AppConfig.domain : '') +
           ';expires=Thu, 01-Jan-1970 00:00:01 GMT';
         return true;
-      } else {
-        return false;
+      } else if(typeof(cookies) === 'array') {
+        var tc = cookies.length, i;
+        for (i = 0; i < tc; i+=1) {
+          document.cookie = cookies[i] + '=' +
+            ((AppConfig.path) ? ';path=' + AppConfig.path : '') +
+            ((AppConfig.domain) ? ';domain=' + AppConfig.domain : '') +
+            ';expires=Thu, 01-Jan-1970 00:00:01 GMT';
+        }
+        return true;
       }
+      return false;
     }
     /**
      * Function will allow user cookies to be stored for tracking purpose and third party scripts.
@@ -689,4 +705,4 @@
   }());
   //window.EU = EU || {};
   exports.EU = EU;
-}(window));
+}(window, jQuery));
