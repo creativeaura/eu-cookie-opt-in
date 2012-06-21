@@ -45,20 +45,11 @@ Simple include the cookie javascript file on your page and initilize cookie mana
               optin_cookie_name: 'OPTIN', // cookie name
               test:false, 
               idle:0, // Time in seconds of you want the initial popup to close automatically if user dont intract with it. 
-              link: 'cookie.html', // Linkf or the page if you want to include a page for cookie information for user. 
-              functionalList: { // Functionality list for all three levels. 
-                'strict': {
-                  'will' : ['Remember what is in your shopping basket', 'Remember cookie access level.'],
-                  'willnot': ['Send information to other websites so that advertising is more relevant to you', 'Remember your log-in details', 'Improve overall performance of the website', 'Provide you with live, online chat support']
-                },
-                'functional': {
-                  'will' : ['Remember what is in your shopping basket', 'Remember cookie access level.','Remember your log-in details','Make sure the website looks consistent','Offer live chat support'],
-                  'willnot': ['Allow you to share pages with social networks like Facebook', 'Allow you to comment on blogs', 'Send information to other websites so that advertising is more relevant to you']
-                },
-                'targeting': {
-                  'will' : ['Remember what is in your shopping basket', 'Remember cookie access level.','Remember your log-in details','Make sure the website looks consistent','Offer live chat support','Send information to other websites so that advertising is more relevant to you'],
-                  'willnot': []
-                }
+              link: 'cookie.html', // Linkf or the page if you want to include a page for cookie information for user
+              assosiatedCookies: {
+                'strict' : ['a'],
+                'functional': ['b', 'c'],
+                'targeting': ['d','e', 'f']
               }
             });
         		}
@@ -101,5 +92,17 @@ You can use getLevel method to retrieve the selected level
 ```html
     <script type="text/javascript">
         EU.Cookie.setLevel(2);
+    </script>
+```
+
+
+### Trash Cookie ####
+
+You can use this function delete a cookie
+
+```html
+    <script type="text/javascript">
+        EU.Cookie.trach('cookie_name');
+        EU.Cookie.trach(['cookie1', 'cookie2']);
     </script>
 ```
