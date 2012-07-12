@@ -394,6 +394,11 @@
         hide();
         toggleOptions();
       });
+	  
+	  EU.Events.addEvent(document.getElementById('COOKIE_CANCEL'), 'click', function (event) {        
+        hide();
+        toggleOptions();
+      });
     }
 
     removeCookies = function(currentOption) {
