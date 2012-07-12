@@ -4,44 +4,51 @@
 	<meta charset="utf-8">
 	<title>HUK Cookie JS</title>
 	<meta name="description" content="">
-  <meta name="author" content="">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="css/cookie_style.css">
+	<meta name="author" content="">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="css/cookie_style.css">
 </head>
 <body>
 	
 	<div id='container'>
 		<h1>EU - Cookie Opt in-out</h1>
-            <p>This is cookie opt in-out library as per the new EU law released on the 26th May.</p>
+			<p>This is cookie opt in-out library as per the new EU law released on the 26th May.</p>
 		<ul>
-      <li><a href='javascript:EU.CookiePreferenceUI.toggleOptions();void(0);'>Change Settings</a></li>
-    </ul>
+			<li><a href='javascript:EU.CookiePreferenceUI.toggleOptions();void(0);'>Change Settings</a></li>
+		</ul>
 	</div>
 
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="jquery-1.7.2.min.js"><\/script>')</script>
 	
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="jquery-1.7.2.min.js"><\/script>')</script>
-
-	<script type="text/javascript" src='cookie.debug.min.js'></script>
-	
+	<script type="text/javascript" src='cookie.debug.min.js'></script>	
 	<script type="text/javascript">
-		window.onload = init;
-
+		// Use a domready function or the likes (i.e. $(document).ready(init) for jQuery)		
+		// Alternatively, you can use this onload function:
+		attach(window, 'load', init);
+		function attach(elm, event, callback) { // @see http://stackoverflow.com/questions/9434/how-do-i-add-an-additional-window-onload-event-in-javascript
+			if (elm.addEventListener) { // W3C standard
+				window.addEventListener(event, callback, false);
+			} else if (elm.attachEvent) { // Microsoft
+				elm.attachEvent('on' + event, callback);
+			}
+		}
+		
 		function init(){
-      EU.CookieManager.init({
-      	expires: 20,
-      	cookie_prefix: 'EU_',
-      	optin_cookie_name: 'OPTIN',
-      	test:false,
-      	idle:0,
-      	link: 'cookie.html',
-        defaultValue:4,
-        assosiatedCookies: {
-          'strict' : ['a'],
-          'functional': ['b', 'c'],
-          'targeting': ['d','e', 'f']
-        }
-      });
+			EU.CookieManager.init({
+				expires: 20,
+				cookie_prefix: 'EU_',
+				optin_cookie_name: 'OPTIN',
+				test:false,
+				idle:0,
+				link: 'cookie.html',
+				defaultValue:4,
+				assosiatedCookies: {
+					'strict' : ['a'],
+					'functional': ['b', 'c'],
+					'targeting': ['d', 'e', 'f']
+				}
+			});
 		}
 	</script>
 
