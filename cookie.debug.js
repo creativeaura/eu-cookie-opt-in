@@ -37,9 +37,12 @@
   AppConfig = {
     idle: 0,
     level: 0,
-    message: 'The cookie settings on this website are set to \'<strong>allow all cookies</strong>\' to give you the very best experience.' +
-      ' If you continue without changing these settings, you consent to this - but if you want, you can change your settings' +
-      ' you can click on Change Settings link at any time.',
+    message: 'The cookie settings on this website are set to <strong>\'allow all cookies\'</strong> to give you the very best experience.' +
+      ' If you continue without changing these settings you consent to this - but you can change your settings' +
+      ' by clicking the <strong>Change settings</strong> link at any time.',
+	cancel: 'I agree',
+	changeSettings: 'Change settings',
+	linkText: 'Find out more about cookies',
     functionalList: {
         'strict': {
           'will' : ['Remember what is in your shopping basket', 'Remember cookie access level.'],
@@ -185,7 +188,7 @@
         backgroundColor: '#f5f5f5',
         width: panelWidth + 'px',
         height: '200px',
-        padding: '30px 10px 20px 10px',
+        padding: '20px 15px',
         textAlign: 'center',
         //left: (viewportwidth / 2) - (panelWidth / 2) + 'px',
         right: '20px',
@@ -250,12 +253,12 @@
       }
       if (!p) {
         panel.id = 'huk_cookie_prefernce_panel';
-        AppConfig.message += '<div class="huk_cookie_prefernce_toolbar">' +
-          '<input type="button" value="Change Settings" id="EU_OPIN_SETTINGS"/>' +
-          '<input type="button" value="No, Thanks" id="EU_OPIN_CANCEL"/>' +
+        AppConfig.message += '<div class="huk_cookie_prefernce_toolbar">' +          
+          '<input type="button" value="' + AppConfig.cancel + '" id="EU_OPIN_CANCEL"/>' +
+		  '<input type="button" value="' + AppConfig.changeSettings + '" id="EU_OPIN_SETTINGS"/>' +
           '</div>' +
           '<div class="huk_cookie_prefernce_link">' +
-          '<a href="' + AppConfig.link + '" target="_blank">find out more about cookies -></a>' +
+          '<a href="' + AppConfig.link + '" target="_blank">' + AppConfig.linkText + '</a>' +
           '</div>';
         panel.innerHTML = AppConfig.message;
 
@@ -388,6 +391,11 @@
         } else if(document.getElementById('strict').checked) {
           EU.Cookie.set({name: AppConfig.cookie, value: '1', expires: expires});
         }
+        hide();
+        toggleOptions();
+      });
+	  
+	  EU.Events.addEvent(document.getElementById('COOKIE_CANCEL'), 'click', function (event) {        
         hide();
         toggleOptions();
       });

@@ -1,8 +1,7 @@
 /**
  * Mixins 
  */
-.border-radius(@topright: 0, @bottomright: 0, @bottomleft: 0, @topleft: 0) 
-{
+.border-radius(@topright: 0, @bottomright: 0, @bottomleft: 0, @topleft: 0) {
 	-webkit-border-top-right-radius: @topright;
 	-webkit-border-bottom-right-radius: @bottomright;
 	-webkit-border-bottom-left-radius: @bottomleft;
@@ -18,8 +17,16 @@
 	-moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box; 
 }
 
-body{
-	font: 75% "Arial", "Trebuchet MS", Verdana, sans-serif;
+.opacity(@opacity) {
+	opacity: @opacity;
+    @filter: @opacity * 100;
+	filter:alpha(opacity=@filter);
+}
+
+#huk_cookie_prefernce_panel,
+#huk_cookie_prefernce_panel_ex {
+	font: 12px sans-serif;
+	line-height: 1.7;
 }
 
 /** 
@@ -28,7 +35,6 @@ body{
 #huk_cookie_prefernce_panel{
 	.border-radius(3px, 3px, 3px, 3px);
 	border:1px solid #999;
-	line-height:20px;
 	-webkit-box-shadow: 0px 0px 19px #999;
 	-moz-box-shadow:    0px 0px 19px #999;
 	box-shadow:         0px 0px 19px #999;
@@ -47,113 +53,111 @@ body{
 			margin:-2px 10px;
 		}
 	}
-	.huk_cookie_prefernce_toolbar{
-		margin-top:50px;
+	.huk_cookie_prefernce_toolbar {
+		margin-top: 30px;
 		input[type=button] {
-		  background: #e3e3e3;
-		  border: 1px solid #bbb;
-		  -webkit-border-radius: 3px;
-		  -moz-border-radius: 3px;
-		  -ms-border-radius: 3px;
-		  -o-border-radius: 3px;
-		  border-radius: 3px;
-		  -webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
-		  -moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
-		  box-shadow: inset 0 0 1px 1px #f6f6f6;
-		  color: #333;
-		  font: bold 12px "helvetica neue", helvetica, arial, sans-serif;
-		  line-height: 1;
-		  padding: 8px 0 9px;
-		  text-align: center;
-		  text-shadow: 0 1px 0 #fff;
-		  width: 120px; 
-		  margin-left:10px;
+			background: #e3e3e3;
+			border: 1px solid #bbb;
+			-webkit-border-radius: 3px;
+			-moz-border-radius: 3px;
+			-ms-border-radius: 3px;
+			-o-border-radius: 3px;
+			border-radius: 3px;
+			-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+			-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+			box-shadow: inset 0 0 1px 1px #f6f6f6;
+			color: #333;
+			font: bold 12px "helvetica neue", helvetica, arial, sans-serif;
+			padding: 8px 0 9px;
+			text-align: center;
+			text-shadow: 0 1px 0 #fff;
+			width: 120px; 
+			margin-left: 10px;
 
-		  &:hover {
-		    background: #d9d9d9;
-		    -webkit-box-shadow: inset 0 0 1px 1px #eaeaea;
-		    -moz-box-shadow: inset 0 0 1px 1px #eaeaea;
-		    box-shadow: inset 0 0 1px 1px #eaeaea;
-		    color: #222;
-		    cursor: pointer; 
-	  	}
+			&:hover {
+				background: #d9d9d9;
+				-webkit-box-shadow: inset 0 0 1px 1px #eaeaea;
+				-moz-box-shadow: inset 0 0 1px 1px #eaeaea;
+				box-shadow: inset 0 0 1px 1px #eaeaea;
+				color: #222;
+				cursor: pointer; 
+			}
 
-	  	&:active {
-		    background: #d0d0d0;
-		    -webkit-box-shadow: inset 0 0 1px 1px #e3e3e3;
-		    -moz-box-shadow: inset 0 0 1px 1px #e3e3e3;
-		    box-shadow: inset 0 0 1px 1px #e3e3e3;
-		    color: #000; 
-	  	}
+			&:active {
+				background: #d0d0d0;
+				-webkit-box-shadow: inset 0 0 1px 1px #e3e3e3;
+				-moz-box-shadow: inset 0 0 1px 1px #e3e3e3;
+				box-shadow: inset 0 0 1px 1px #e3e3e3;
+				color: #000; 
+			}
 		}
 	}
+
+	.huk_cookie_prefernce_link {
+		margin-top: 20px;
+	}
 }
-#ck-overlay{
-	background-color: #000;
-	opacity: 0.6;
-	-moz-opacity: 0.6;
-	filter:alpha(opacity=60);
+#ck-overlay {
+	.opacity(0.6);
+	background-color: #000;	
 	position: fixed;
-	top:0;
-	left:0;
-	width:100%;
-	height:100%;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }
-#cookie-ext-panel{
+#cookie-ext-panel {
 	.border-radius(3px, 3px, 3px, 3px);
 	background-color: #f5f5f5;
 	width:600px;
-	padding:10px 10px;
+	padding: 0 20px;
 	border:3px solid #333;
-	line-height:18px;
 	-webkit-box-shadow: 0px 0px 19px #999;
 	-moz-box-shadow:    0px 0px 19px #999;
 	box-shadow:         0px 0px 19px #999;
-	#c-toolbar{
+	#c-toolbar {
 		text-align:right;
-		margin:20px;
-		height:20px;
+		margin: 20px 0 20px 0;
+		height: 20px;
 		input[type=button] {
 			float: right;
-		  background: #e3e3e3;
-		  border: 1px solid #bbb;
-		  -webkit-border-radius: 3px;
-		  -moz-border-radius: 3px;
-		  -ms-border-radius: 3px;
-		  -o-border-radius: 3px;
-		  border-radius: 3px;
-		  -webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
-		  -moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
-		  box-shadow: inset 0 0 1px 1px #f6f6f6;
-		  color: #333;
-		  font: bold 12px "helvetica neue", helvetica, arial, sans-serif;
-		  line-height: 1;
-		  padding: 8px 0 9px;
-		  text-align: center;
-		  text-shadow: 0 1px 0 #fff;
-		  width: 120px; 
-		  margin-left:10px;
+			background: #e3e3e3;
+			border: 1px solid #bbb;
+			-webkit-border-radius: 3px;
+			-moz-border-radius: 3px;
+			-ms-border-radius: 3px;
+			-o-border-radius: 3px;
+			border-radius: 3px;
+			-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+			-moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+			box-shadow: inset 0 0 1px 1px #f6f6f6;
+			color: #333;
+			font: bold 12px "helvetica neue", helvetica, arial, sans-serif;
+			padding: 8px 0 9px;
+			text-align: center;
+			text-shadow: 0 1px 0 #fff;
+			width: 120px; 
+			margin-left:10px;
 
-		  &:hover {
-		    background: #d9d9d9;
-		    -webkit-box-shadow: inset 0 0 1px 1px #eaeaea;
-		    -moz-box-shadow: inset 0 0 1px 1px #eaeaea;
-		    box-shadow: inset 0 0 1px 1px #eaeaea;
-		    color: #222;
-		    cursor: pointer; 
-	  	}
+			&:hover {
+				background: #d9d9d9;
+				-webkit-box-shadow: inset 0 0 1px 1px #eaeaea;
+				-moz-box-shadow: inset 0 0 1px 1px #eaeaea;
+				box-shadow: inset 0 0 1px 1px #eaeaea;
+				color: #222;
+				cursor: pointer; 
+			}
 
-	  	&:active {
-		    background: #d0d0d0;
-		    -webkit-box-shadow: inset 0 0 1px 1px #e3e3e3;
-		    -moz-box-shadow: inset 0 0 1px 1px #e3e3e3;
-		    box-shadow: inset 0 0 1px 1px #e3e3e3;
-		    color: #000; 
-	  	}
+			&:active {
+				background: #d0d0d0;
+				-webkit-box-shadow: inset 0 0 1px 1px #e3e3e3;
+				-moz-box-shadow: inset 0 0 1px 1px #e3e3e3;
+				box-shadow: inset 0 0 1px 1px #e3e3e3;
+				color: #000; 
+			}
 		}
 	}
 }
-
 
 #cookie-functionalList{
 	height:200px;
@@ -167,6 +171,7 @@ body{
 		float: left;
 	}
 }
+
 #cookie-selection{
 	clear: both;
 	#cokkie-options{
@@ -184,7 +189,6 @@ body{
 			span{
 				display: block;
 				height:35px;
-				line-height:16px;
 			}
 		}
 		& label:hover{
@@ -192,6 +196,7 @@ body{
 		}
 	}
 }
+
 .clearfix:after {
      visibility: hidden;
      display: block;
