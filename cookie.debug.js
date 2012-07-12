@@ -185,7 +185,7 @@
         backgroundColor: '#f5f5f5',
         width: panelWidth + 'px',
         height: '200px',
-        padding: '30px 10px 20px 10px',
+        padding: '20px 15px',
         textAlign: 'center',
         //left: (viewportwidth / 2) - (panelWidth / 2) + 'px',
         right: '20px',
