@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<head>
+	<meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>EU Cookie JS</title>
+
+
+  <link rel="stylesheet" href="css/foundation.css" />
+	<link rel="stylesheet" type="text/css" href="../css/cookie_style.css">
+
+  <script src="js/vendor/custom.modernizr.js"></script>
+
+</head>
+<body>
+
+	<div class="row">
+		<div class="large-12 columns">
+			<h2>EU - Cookie Opt in-out</h2>
+			<p>Current version 1.0.0</p>
+			<hr />
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="large-12 columns">
+			<h3>About this Script</h3>
+
+			<!-- Grid Example -->
+			<div class="row">
+				<div class="large-12 columns">
+					<div class="panel">
+						<p>This Cookie scripts will give you an user interface where visitors can optin or out to allow your website to user cookies. (An inspiration from BT.com). Once user opts for a level privacy you can load various async scripts.</p>
+
+						<p>For example if user don't opt for targeting level you will not load or include your google analytics code. You can define a strict level of cookies required for your website to work and mention it on the functionalList option while initializing the cookie manager code.</p>
+
+						<p>An optimized mobile version is also coming soon. If you have any better idea please drop me an email at gaurav@jassal.me</p>
+					</div>
+				</div>
+			</div>
+			<h3>Open Setting Panel</h3>
+			<a href="javascript:EU.CookiePreferenceUI.toggleOptions();void(0);" class="button radius">Open Setting Panel</a>
+
+			<div class="row">
+				<div class="large-12 columns">
+					<div class="panel">
+						<p>The Cookie Law is a new piece of privacy legislation that requires websites to obtain consent from visitors to store or retrieve any information on a computer or any other web connected device, like a smartphone or tablet.</p>
+
+						<p>It has been designed to protect online privacy, by making consumers aware of how information about them is collected by websites, and enable them to choose whether or not they want to allow it to take place.</p>
+
+						<p>It started as an EU Directive that was adopted by all EU countries on May 26th 2011. At the same time the UK updated its Privacy and Electronic Communications Regulations, which brought the EU Directive it into UK law.</p>
+
+						<p>Each EU member state has done or is doing the same thing. Although they all have their own approach and interpretation, the basic requirements of the directive remain the same.</p>
+					</div>
+				</div>
+			</div>
+
+			 <!-- Footer -->
+
+		  <footer class="row">
+		    <div class="large-12 columns">
+		      <hr />
+		      <div class="row">
+		        <div class="large-12 columns">
+		          <p>Script by <a href="http://twitter.com/gauravjassal">@gauravjassal</a>. Any questions feel free to contact me.</p>
+		        </div>
+		      </div>
+		    </div>
+		  </footer>
+		</div>
+
+	</div>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="../jquery-1.7.2.min.js"><\/script>')</script>
+
+	<script type="text/javascript" src='../cookie.debug.js'></script>
+
+	<script type="text/javascript">
+		// Use a domready function or the likes (i.e. $(document).ready(init) for jQuery)
+		// Alternatively, you can use this onload function:
+		attach(window, 'load', init);
+		function attach(elm, event, callback) { // @see http://stackoverflow.com/questions/9434/how-do-i-add-an-additional-window-onload-event-in-javascript
+			if (elm.addEventListener) { // W3C standard
+				window.addEventListener(event, callback, false);
+			} else if (elm.attachEvent) { // Microsoft
+				elm.attachEvent('on' + event, callback);
+			}
+		}
+
+		function init(){
+			EU.CookieManager.init({
+				expires: 20,
+				cookie_prefix: 'EU_',
+				optin_cookie_name: 'OPTIN',
+				test:false,
+				idle:0,
+				link: 'cookie.html',
+				defaultValue:4,
+				assosiatedCookies: {
+					'strict' : ['a'],
+					'functional': ['b', 'c'],
+					'targeting': ['d', 'e', 'f']
+				}
+			});
+		}
+	</script>
+</body>
+</html>

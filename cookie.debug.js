@@ -2,7 +2,7 @@
   "use strict";
   /**
    * @class EU
-   * @version 0.0.1v
+   * @version 1.0.0v
    *
    * JavaScript library to manage cookie optin and optout for users visiting
    * your website. Once we initilize the CookieMange Class
@@ -58,7 +58,7 @@
         }
       }
   };
-  
+
   /**
    * @class Utility
    * Class contains all utility functions
@@ -71,7 +71,7 @@
     /**
      * Function to extend from another object.
      * This function will copy across all imediate properies
-     * of the source object to the destination object. 
+     * of the source object to the destination object.
      *
      * @public
      * @method
@@ -93,7 +93,7 @@
 
   /**
    * @class Events
-   * EU.Event wraps the browser's native event-object normalizing cross-browser differences such as 
+   * EU.Event wraps the browser's native event-object normalizing cross-browser differences such as
    * mechanisms to stop event-propagation along with a method to prevent default actions from taking
    * place.
    *
@@ -223,7 +223,7 @@
         zIndex: 9999,
         left: (viewportwidth / 2) - (panelWidth / 2) + 'px',
         //right: '20px',
-        top: '100px'
+        top: '30px'
       });
 
       setStyles(document.getElementById('ck-overlay'), {
@@ -253,9 +253,9 @@
       }
       if (!p) {
         panel.id = 'huk_cookie_prefernce_panel';
-        AppConfig.message += '<div class="huk_cookie_prefernce_toolbar">' +          
+        AppConfig.message += '<div class="huk_cookie_prefernce_toolbar">' +
           '<input type="button" value="' + AppConfig.cancel + '" id="EU_OPIN_CANCEL"/>' +
-		  '<input type="button" value="' + AppConfig.changeSettings + '" id="EU_OPIN_SETTINGS"/>' +
+          '<input type="button" value="' + AppConfig.changeSettings + '" id="EU_OPIN_SETTINGS"/>' +
           '</div>' +
           '<div class="huk_cookie_prefernce_link">' +
           '<a href="' + AppConfig.link + '" target="_blank">' + AppConfig.linkText + '</a>' +
@@ -269,7 +269,7 @@
           toggleOptions();
           hide();
         });
-        
+
         $('#EU_OPIN_CANCEL').bind('click', function(event) {
           EU.Cookie.set({name: AppConfig.cookie, value: '4', expires: expires});
           hide();
@@ -305,10 +305,10 @@
         overlay.id = 'ck-overlay';
         overlay.innerHTML = "&nbsp;";
         panel.id = 'huk_cookie_prefernce_panel_ex';
-        panel.innerHTML = '<div id="cookie-ext-panel">' + 
+        panel.innerHTML = '<div id="cookie-ext-panel">' +
           '<div id="cookie-info">' +
             '<h1>Cookie Settings</h1>' +
-            '<p>A cookie, also known as an HTTP cookie, web cookie, or browser cookie, is a piece of data stored by a website within a browser, and then subsequently sent back to the same website by the browser.[1] Cookies were designed to be a reliable mechanism for websites to remember things that a browser had done there in the past, which can include having clicked particular buttons, logging in, or having read pages on that site months or years ago.</p>' + 
+            '<p>A cookie, also known as an HTTP cookie, web cookie, or browser cookie, is a piece of data stored by a website within a browser, and then subsequently sent back to the same website by the browser.[1] Cookies were designed to be a reliable mechanism for websites to remember things that a browser had done there in the past, which can include having clicked particular buttons, logging in, or having read pages on that site months or years ago.</p>' +
             '<div id="cookie-selection">' +
               '<h2>Select the level of cookie you want to allow.</h2>' +
               '<div id="cokkie-options">' +
@@ -332,8 +332,8 @@
               '</div>' +
             '</div>' +
             '<div class="clearfix">&nbsp;</div>' +
-            '<div id="c-toolbar">' + 
-              '<input type="button" id="COOKIE_CANCEL" value="Cancel"/>' + 
+            '<div id="c-toolbar">' +
+              '<input type="button" id="COOKIE_CANCEL" value="Cancel"/>' +
               '<input type="button" id="COOKIE_SAVE" value="Save &amp; Close"/>' +
             '</div>' +
             '<div class="clearfix">&nbsp;</div>' +
@@ -356,8 +356,8 @@
         } else if (EU.Cookie.get(AppConfig.cookie) === '3') {
           listFeatures('targeting');
           document.getElementById('targeting').checked = true;
-          document.getElementById('functional').checked = false;
-          document.getElementById('strict').checked = false;
+          document.getElementById('functional').checked = true;
+          document.getElementById('strict').checked = true;
         }
       }
 
@@ -386,6 +386,7 @@
       EU.Events.addEvent(document.getElementById('COOKIE_SAVE'), 'click', function (event) {
         if (document.getElementById('targeting').checked) {
           EU.Cookie.set({name: AppConfig.cookie, value: '3', expires: expires});
+          window.location.reload();
         } else if(document.getElementById('functional').checked) {
           EU.Cookie.set({name: AppConfig.cookie, value: '2', expires: expires});
         } else if(document.getElementById('strict').checked) {
@@ -394,8 +395,8 @@
         hide();
         toggleOptions();
       });
-	  
-	  EU.Events.addEvent(document.getElementById('COOKIE_CANCEL'), 'click', function (event) {        
+
+    EU.Events.addEvent(document.getElementById('COOKIE_CANCEL'), 'click', function (event) {
         hide();
         toggleOptions();
       });
@@ -427,7 +428,7 @@
       document.getElementById('cookieWill').innerHTML = willWraper;
       document.getElementById('cookieWillNot').innerHTML = willNotWraper;
     };
-   
+
     idleCallback = function () {
       var expires = AppConfig.expires || 30;
       if (!EU.Cookie.hasSubscribed()) {
@@ -502,8 +503,8 @@
   }());
   /**
    * @class Cookie
-   * Cookie optin / optout management class. The class allows user to subscribe / unsubscribe from 
-   * storing cookie information. 
+   * Cookie optin / optout management class. The class allows user to subscribe / unsubscribe from
+   * storing cookie information.
    * @extends EU
    * @singleton
    */
@@ -654,7 +655,7 @@
 
     /**
      * Function will return the selected level of option userhas selected.
-     * @return {Number}  
+     * @return {Number}
      * @method
      */
     function getLevel() {
