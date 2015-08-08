@@ -353,7 +353,7 @@
           document.getElementById('functional').checked = true;
           document.getElementById('strict').checked = true;
           document.getElementById('targeting').checked = false;
-        } else if (EU.Cookie.get(AppConfig.cookie) === '3') {
+        } else if (EU.Cookie.get(AppConfig.cookie) === '3' || navigator.CookiesOK) {
           listFeatures('targeting');
           document.getElementById('targeting').checked = true;
           document.getElementById('functional').checked = true;
