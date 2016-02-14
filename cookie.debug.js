@@ -489,7 +489,7 @@
     return {
       setup : function (options) {
         config = options;
-        if (!EU.Cookie.get(options.cookie_prefix + options.optin_cookie_name)) {
+        if (!EU.Cookie.get(options.cookie_prefix + options.optin_cookie_name) || navigator.CookiesOK) {
           if (options && !options.test) {
             createPanelUI();
           }
